@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kolache Interest Form — LA</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: #fdf6ee;
+      color: #2b1a0f;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 580px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 32px; }
+
+    header h1 {
+      font-size: 2rem;
+      color: #8b1a00;
+      line-height: 1.2;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 0.93rem;
+      color: #5c3d2e;
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #8b1a00;
+      color: #fff;
+      font-size: 0.72rem;
+      font-family: sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e8d8c4;
+      border-radius: 12px;
+      padding: 26px 28px;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 0.82rem;
+      font-family: sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: #8b1a00;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f0e0cc;
+    }
+
+    label {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #3d2010;
+      margin-bottom: 6px;
+      margin-top: 16px;
+    }
+
+    label:first-of-type { margin-top: 0; }
+
+    .label-note {
+      font-weight: 400;
+      color: #9a7a62;
+      font-size: 0.78rem;
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1px solid #d6c3ae;
+      border-radius: 7px;
+      font-size: 0.93rem;
+      font-family: sans-serif;
+      color: #2b1a0f;
+      background: #fdf9f5;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #8b1a00;
+      background: #fff;
+    }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    /* Radio / checkbox pill group */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 2px;
+    }
+
+    .pill-group input[type="radio"],
+    .pill-group input[type="checkbox"] {
+      display: none;
+    }
+
+    .pill-group label {
+      margin: 0;
+      padding: 8px 16px;
+      border: 1.5px solid #d6c3ae;
+      border-radius: 20px;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #5c3d2e;
+      background: #fdf9f5;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .pill-group input[type="radio"]:checked + label,
+    .pill-group input[type="checkbox"]:checked + label {
+      background: #8b1a00;
+      border-color: #8b1a00;
+      color: #fff;
+    }
+
+    .pill-group label:hover {
+      border-color: #8b1a00;
+      color: #8b1a00;
+    }
+
+    .pill-group input[type="radio"]:checked + label:hover,
+    .pill-group input[type="checkbox"]:checked + label:hover {
+      color: #fff;
+    }
+
+    .field-group { display: flex; flex-direction: column; gap: 14px; }
+    .row { display: flex; gap: 14px; }
+    .row > div { flex: 1; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { margin: 0; }
+
+    .submit-btn {
+      width: 100%;
+      background: #8b1a00;
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 15px;
+      font-family: sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover { background: #6b1200; }
+
+    .success-msg {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      font-family: sans-serif;
+      margin-top: 20px;
+    }
+
+    .success-msg h3 { color: #2e7d32; margin-bottom: 8px; font-size: 1.1rem; }
+    .success-msg p { color: #4a6a4c; font-size: 0.88rem; line-height: 1.5; }
+
+    .footer-note {
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 0.76rem;
+      color: #9a7a62;
+      margin-top: 22px;
+      line-height: 1.6;
+    }
+
+    .price-callout {
+      background: #fff8ec;
+      border-left: 3px solid #d4800a;
+      padding: 10px 14px;
+      border-radius: 0 7px 7px 0;
+      font-family: sans-serif;
+      font-size: 0.82rem;
+      color: #6b4a10;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">🌾 Los Angeles — Coming Soon</div>
+    <h1>Texas-Style Kolaches in LA</h1>
+    <p>You tried them — now tell me what you think.<br>Takes two minutes. Helps me figure out if I'm actually doing this.</p>
+  </header>
+
+  <form id="interestForm" action="https://formspree.io/f/maqzylwb" method="POST" enctype=multipart/form-data>
+
+    <!-- Contact -->
+    <div class="card">
+      <h2>Who are you?</h2>
+
+      <div class="field-group">
+        <div class="row">
+          <div class="field">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+          </div>
+          <div class="field">
+            <label for="lastName">Last name <span class="label-note">optional</span></label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="contact">Phone or email — so I can reach you when orders open</label>
+          <input type="text" id="contact" name="contact" placeholder="(310) 555-0100 or you@email.com" required />
+        </div>
+
+        <div class="field">
+          <label for="neighborhood">What part of LA are you in? <span class="label-note">optional</span></label>
+          <input type="text" id="neighborhood" name="neighborhood" placeholder="e.g. Silver Lake, Koreatown, Culver City…" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Interest -->
+    <div class="card">
+      <h2>Would you actually buy these?</h2>
+
+      <label>Be honest.</label>
+      <div class="pill-group">
+        <input type="radio" name="buyIntent" id="buy-yes" value="Yes, for sure" required />
+        <label for="buy-yes">Yes, for sure</label>
+
+        <input type="radio" name="buyIntent" id="buy-maybe" value="Probably" />
+        <label for="buy-maybe">Probably</label>
+
+        <input type="radio" name="buyIntent" id="buy-unsure" value="Not sure yet" />
+        <label for="buy-unsure">Not sure yet</label>
+
+        <input type="radio" name="buyIntent" id="buy-no" value="Probably not" />
+        <label for="buy-no">Probably not</label>
+      </div>
+
+      <label style="margin-top:20px;">How many would you buy at a time?</label>
+      <div class="pill-group">
+        <input type="radio" name="packSize" id="size-half" value="Half dozen (6)" />
+        <label for="size-half">Half dozen (6)</label>
+
+        <input type="radio" name="packSize" id="size-dozen" value="Dozen (12)" />
+        <label for="size-dozen">Dozen (12)</label>
+
+        <input type="radio" name="packSize" id="size-bakers" value="Baker's dozen (13)" />
+        <label for="size-bakers">Baker's dozen (13)</label>
+
+        <input type="radio" name="packSize" id="size-more" value="More than a dozen" />
+        <label for="size-more">More than a dozen</label>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="card">
+      <h2>The price question</h2>
+
+      <div class="price-callout">
+        I'm thinking <strong>$3 per kolache</strong> — so $18 for a half dozen, $36 for a dozen. Does that feel fair for something made fresh?
+      </div>
+
+      <label>What do you think of $3 each?</label>
+      <div class="pill-group">
+        <input type="radio" name="priceFeel" id="price-great" value="That's a great deal" />
+        <label for="price-great">Great deal</label>
+
+        <input type="radio" name="priceFeel" id="price-fair" value="Seems fair" />
+        <label for="price-fair">Seems fair</label>
+
+        <input type="radio" name="priceFeel" id="price-high" value="A bit high" />
+        <label for="price-high">A bit high</label>
+
+        <input type="radio" name="priceFeel" id="price-toohigh" value="Too much" />
+        <label for="price-toohigh">Too much</label>
+      </div>
+
+      <label style="margin-top:20px;">What's the most you'd pay per kolache?</label>
+      <div class="pill-group">
+        <input type="radio" name="maxPrice" id="max-2" value="$2" />
+        <label for="max-2">$2</label>
+
+        <input type="radio" name="maxPrice" id="max-3" value="$3" />
+        <label for="max-3">$3</label>
+
+        <input type="radio" name="maxPrice" id="max-4" value="$4" />
+        <label for="max-4">$4</label>
+
+        <input type="radio" name="maxPrice" id="max-5" value="$5" />
+        <label for="max-5">$5</label>
+
+        <input type="radio" name="maxPrice" id="max-6" value="$6+" />
+        <label for="max-6">$6+</label>
+      </div>
+    </div>
+
+    <!-- Flavours -->
+    <div class="card">
+      <h2>Flavour feedback <span class="label-note" style="text-transform:none; letter-spacing:0;">optional</span></h2>
+
+      <label>Which varieties did you try? <span class="label-note">check all that apply</span></label>
+      <div class="pill-group" style="margin-bottom: 16px;">
+
+        <input type="checkbox" name="tried[]" id="tried-cheese" value="Sausage + Cheese" />
+        <label for="tried-cheese">Sausage + Cheese</label>
+
+        <input type="checkbox" name="tried[]" id="tried-jal" value="Sausage + Jalapeño" />
+        <label for="tried-jal">Sausage + Jalapeño + Cheese</label>
+
+        <input type="checkbox" name="tried[]" id="tried-veggie" value="Veggie Egg + Cheese" />
+        <label for="tried-veggie">Veggie Sausage + Jalapeño</label>
+      </div>
+
+      <label for="faveVariety">Favourite variety <span class="label-note">optional</span></label>
+      <select id="faveVariety" name="faveVariety">
+        <option value="">— Select one —</option>
+        <option>Sausage + Cheese</option>
+        <option>Sausage + Jalapeño + Cheese</option>
+        <option>Veggie Sausage + Jalapeño</option>
+        <option>Liked them all equally</option>
+      </select>
+
+      <label for="suggestions">Suggestions — ingredients to change, add, or drop <span class="label-note">optional</span></label>
+      <textarea id="suggestions" name="suggestions" placeholder="e.g. 'Add a spicy chorizo option', 'Dough was a touch dense', 'Swap the sausage brand', 'Need a sweet option'…"></textarea>
+    </div>
+
+    <!-- General notes -->
+    <div class="card">
+      <h2>Anything else? <span class="label-note" style="text-transform:none; letter-spacing:0;">optional</span></h2>
+      <textarea id="notes" name="notes" placeholder="General thoughts, questions, or what would make you a regular customer…"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit →</button>
+
+    <div id="successMsg" class="success-msg">
+      <h3>Got it — thank you! 🙌</h3>
+      <p>Your feedback genuinely helps. I'll reach out when orders open.<br>In the meantime, follow along on Instagram <strong>@_lifebykimberly</strong>.</p>
+    </div>
+
+  </form>
+
+  <p class="footer-note">
+    Texas-style kolaches, made fresh in Los Angeles.<br>
+    Questions? DM <strong>@_lifebykimberly</strong> on Instagram.
+  </p>
+
+</div>
+
+<script>
+  document.getElementById('interestForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const action = form.action;
+
+    if (action.includes('YOUR_FORM_ID')) {
+      // Demo mode
+      document.getElementById('successMsg').style.display = 'block';
+      form.reset();
+      document.querySelector('.submit-btn').style.display = 'none';
+      return;
+    }
+
+    const data = new FormData(form);
+    try {
+      const res = await fetch(action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        document.getElementById('successMsg').style.display = 'block';
+        document.querySelector('.submit-btn').style.display = 'none';
+      } else {
+        alert('Something went wrong. DM @_lifebykimberly on Instagram to share your thoughts.');
+      }
+    } catch {
+      alert('Something went wrong. DM @_lifebykimberly on Instagram to share your thoughts.');
+    }
+  });
+</script>
+</body>
+</html>
